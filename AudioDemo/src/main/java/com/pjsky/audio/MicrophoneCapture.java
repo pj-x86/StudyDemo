@@ -166,6 +166,20 @@ public class MicrophoneCapture {
         return ais;
     }
 
+    public byte[] getAudioData() {
+        byte[] data = baos.toByteArray();
+
+        try {
+            if (baos != null) {
+                baos.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return data;
+    }
+
     public static void main(String args[]) {
         MicrophoneCapture microphoneCapture = new MicrophoneCapture();
 

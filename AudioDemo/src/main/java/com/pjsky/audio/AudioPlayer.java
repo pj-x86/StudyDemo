@@ -56,6 +56,18 @@ public class AudioPlayer {
         speaker.close();
     }
 
+    public void play(byte[] data, AudioFormat format) throws Exception {
+        DataLine.Info info = new DataLine.Info(SourceDataLine.class, format);
+        speaker = (SourceDataLine) AudioSystem.getLine(info);
+        speaker.open(format);
+        speaker.start();
+
+        speaker.write(data, 0, data.length);
+
+        speaker.drain();
+        speaker.close();
+    }
+
     public void play2(String filePath) {
         FileInputStream fis = null;
         BufferedInputStream bis = null;
