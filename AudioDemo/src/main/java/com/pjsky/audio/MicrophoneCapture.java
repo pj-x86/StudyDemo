@@ -15,6 +15,10 @@ import javax.sound.sampled.TargetDataLine;
 
 public class MicrophoneCapture {
 
+    float sampleRate = 16000; //采样率， 8000,11025,16000,22050,44100
+    int sampleSizeInBits = 16; //采样位数， 8,16
+    int channels = 1; //声道数， 1-单声道,2-双声道
+
     CountDownLatch latch = new CountDownLatch(1);
     ByteArrayOutputStream baos = new ByteArrayOutputStream(); // 采集到的音频数据暂时保存在这个流中
 
@@ -23,10 +27,25 @@ public class MicrophoneCapture {
     boolean flag = true; // 是否开始录音
     int MAX_DOWN_SUM = 50; // 连续无声音自动退出最大次数
 
+    MicrophoneCapture() {
+        sampleRate = 16000; 
+        sampleSizeInBits = 16; 
+        channels = 1; 
+    }
+
+    /**
+     * 
+     * @param sampleRate 采样率，可选值：8000, 16000, 44100
+     * @param sampleSizeInBits 采样位数，可选值：8, 16
+     * @param channels 声道数，可选值：1, 2
+     */
+    MicrophoneCapture(float sampleRate, int sampleSizeInBits, int channels) {
+        this.sampleRate = sampleRate;
+        this.sampleSizeInBits = sampleSizeInBits;
+        this.channels = channels;
+    }
+
     public AudioFormat getAudioFormat() {
-        float sampleRate = 16000; // 8000,11025,16000,22050,44100
-        int sampleSizeInBits = 16; // 8,16
-        int channels = 1; // 1,2
         boolean signed = true; // true,false
         boolean bigEndian = false; // true,false
         return new AudioFormat(sampleRate, sampleSizeInBits, channels, signed, bigEndian);

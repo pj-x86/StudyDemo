@@ -38,7 +38,7 @@ class AudioTest {
 			Scanner scanner = new Scanner(System.in);
 			int choice = Integer.parseInt(scanner.nextLine());
 
-			MicrophoneCapture microphoneCapture = new MicrophoneCapture();
+			MicrophoneCapture microphoneCapture = new MicrophoneCapture(8000, 16, 1);
 			AudioInputStream audioInputStream;
 			AudioPlayer audioPlayer = new AudioPlayer();
 			if (choice == 1) {
